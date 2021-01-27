@@ -1,0 +1,92 @@
+,ActorID,Age,Sex,Race,Ethnicity
+1,1001,51,Male,Caucasian,Not Hispanic
+3,1002,21,Female,Caucasian,Not Hispanic
+5,1003,21,Female,Caucasian,Not Hispanic
+7,1004,42,Female,Caucasian,Not Hispanic
+9,1005,29,Male,African American,Not Hispanic
+11,1006,58,Female,Caucasian,Not Hispanic
+13,1007,38,Female,African American,Not Hispanic
+15,1008,46,Female,Caucasian,Not Hispanic
+17,1009,24,Female,Caucasian,Not Hispanic
+19,1010,27,Female,Caucasian,Not Hispanic
+21,1011,32,Male,Caucasian,Not Hispanic
+23,1012,23,Female,Caucasian,Not Hispanic
+25,1013,22,Female,Caucasian,Hispanic
+27,1014,24,Male,Caucasian,Not Hispanic
+29,1015,32,Male,African American,Not Hispanic
+31,1016,61,Male,Caucasian,Not Hispanic
+33,1017,42,Male,Caucasian,Not Hispanic
+35,1018,25,Female,Caucasian,Hispanic
+37,1019,29,Male,Asian,Not Hispanic
+39,1020,61,Female,Caucasian,Not Hispanic
+41,1021,30,Female,Caucasian,Not Hispanic
+43,1022,22,Male,Caucasian,Not Hispanic
+45,1023,22,Male,Caucasian,Not Hispanic
+47,1024,59,Female,Caucasian,Not Hispanic
+49,1025,48,Female,Caucasian,Not Hispanic
+51,1026,33,Male,Caucasian,Not Hispanic
+53,1027,44,Male,Caucasian,Not Hispanic
+55,1028,57,Female,Caucasian,Not Hispanic
+57,1029,33,Female,African American,Not Hispanic
+59,1030,42,Female,African American,Not Hispanic
+61,1031,31,Male,Caucasian,Hispanic
+63,1032,30,Male,African American,Not Hispanic
+65,1033,31,Male,Caucasian,Not Hispanic
+67,1034,74,Male,Caucasian,Not Hispanic
+69,1035,48,Male,Caucasian,Not Hispanic
+71,1036,49,Male,African American,Not Hispanic
+73,1037,45,Female,Caucasian,Not Hispanic
+75,1038,21,Male,African American,Not Hispanic
+77,1039,51,Male,African American,Not Hispanic
+79,1040,42,Male,Caucasian,Not Hispanic
+81,1041,42,Male,Caucasian,Not Hispanic
+83,1042,37,Male,African American,Not Hispanic
+85,1043,25,Female,Caucasian,Hispanic
+87,1044,40,Male,Caucasian,Not Hispanic
+89,1045,22,Male,Asian,Not Hispanic
+91,1046,22,Female,Caucasian,Hispanic
+93,1047,22,Female,Unknown,Hispanic
+95,1048,38,Male,Caucasian,Hispanic
+97,1049,25,Female,Caucasian,Hispanic
+99,1050,62,Male,African American,Not Hispanic
+101,1051,56,Male,Caucasian,Not Hispanic
+103,1052,33,Female,Caucasian,Not Hispanic
+105,1053,35,Female,Caucasian,Not Hispanic
+107,1054,36,Female,Caucasian,Not Hispanic
+109,1055,57,Female,Caucasian,Not Hispanic
+111,1056,52,Female,African American,Not Hispanic
+113,1057,25,Male,Caucasian,Not Hispanic
+115,1058,36,Female,Caucasian,Not Hispanic
+117,1059,21,Male,African American,Not Hispanic
+119,1060,28,Female,African American,Not Hispanic
+121,1061,51,Female,African American,Not Hispanic
+123,1062,56,Male,Caucasian,Not Hispanic
+125,1063,33,Female,African American,Not Hispanic
+127,1064,53,Male,Caucasian,Not Hispanic
+129,1065,38,Male,Caucasian,Not Hispanic
+131,1066,25,Male,Caucasian,Not Hispanic
+133,1067,66,Male,Caucasian,Not Hispanic
+135,1068,34,Male,Caucasian,Not Hispanic
+137,1069,27,Male,Caucasian,Not Hispanic
+139,1070,25,Male,African American,Not Hispanic
+141,1071,41,Male,Caucasian,Not Hispanic
+143,1072,33,Female,Asian,Not Hispanic
+145,1073,24,Female,African American,Hispanic
+147,1074,31,Female,African American,Not Hispanic
+149,1075,40,Female,Caucasian,Not Hispanic
+151,1076,25,Female,Caucasian,Not Hispanic
+153,1077,20,Male,Caucasian,Not Hispanic
+155,1078,21,Female,Caucasian,Not Hispanic
+157,1079,21,Female,Caucasian,Hispanic
+159,1080,21,Male,African American,Not Hispanic
+161,1081,30,Male,Asian,Not Hispanic
+163,1082,20,Female,Caucasian,Not Hispanic
+165,1083,45,Male,African American,Not Hispanic
+167,1084,46,Female,Caucasian,Not Hispanic
+169,1085,34,Male,Asian,Not Hispanic
+171,1086,33,Male,Caucasian,Not Hispanic
+173,1087,62,Male,Caucasian,Not Hispanic
+175,1088,23,Male,African American,Not Hispanic
+177,1089,24,Female,Caucasian,Not Hispanic
+179,1090,50,Male,Asian,Not Hispanic
+181,1091,29,Female,Asian,Not Hispanic
