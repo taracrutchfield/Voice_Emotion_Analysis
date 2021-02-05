@@ -1,0 +1,19 @@
+{
+    "model name": "Example",
+    "seed":1,
+    "epochs":3,
+    "layers": {
+                "0":["Conv2D",32,3,3,"relu"],
+                "1":["Conv2D",64,3,3,"relu"],
+                "2":["Dropout",0.2],
+                "3":["Flatten"],
+                "4":["Dense",64,"relu"],
+                "5":["Dropout",0.2],
+                "6":["Dense",7,"softmax"]
+               },
+    "compiler": {
+                "loss":"categorical_crossentropy",
+                "optimizer":"adam",
+                "metrics":"accuracy"
+                }
+}
