@@ -6,13 +6,12 @@
 ### Features
   Using the python package librosa, I’ve extracted numerous audio features from each clip. These features were normalized feature-wise, stacked, then saved as images. The features are as follows:
 
- - *mel-frequency spectrogram*: displays the spectrum of the sound.
- - *chroma_features*: describes the energy of each pitch class.
- - *spectral centroid*: the frequency that the spectrum is centered on, the "center of mass" of the sound.
- - *spectral bandwidth*: the width of the band at one-half the peak maximum.
- - *spectral roll off*: the shape of the signal.
- - *zero crossing rate*: measures the smoothness of the signal.
- - *mel-frequency cepstral coefficients*: describes the shape of the spectral envelope.
+ - **mel-frequency spectrogram**: displays the spectrum of the sound.
+ - **mel-frequency cepstral coefficients**: describes the shape of the spectral envelope.
+ - **chroma_features**: describes the energy of each pitch class.
+ - **spectral centroid**: the frequency that the spectrum is centered on, the "center of mass" of the sound.
+ - **spectral roll off**: the shape of the signal.
+
 
 ### Models
   Currently I’m testing different architectures for convolutional neural networks, the highest so far having an accuracy of 51% (random chance being around 14%). Depending on time, I would also like to look into using a LSTM recurrent neural network as well. 

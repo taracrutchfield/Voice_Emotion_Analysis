@@ -1,22 +1,22 @@
 {
-    "model name": "VVG_Like",
+    "model name": "VVG",
     "seed":1,
     "epochs":20,
+    "split_gender":"False",
     "layers": {
                 "0":{"layer":"Conv2D","filters":16,"kernel_size":[3,3],"activation":"relu","padding":"same"},
                 "1":{"layer":"Conv2D","filters":32,"kernel_size":[3,3],"activation":"relu","padding":"same"},
                 "2":{"layer":"MaxPooling2D","pool_size":[2,2],"stride":2},
                 "3":{"layer":"Conv2D","filters":32,"kernel_size":[3,3],"activation":"relu","padding":"valid"},
                 "4":{"layer":"Conv2D","filters":64,"kernel_size":[3,3],"activation":"relu","padding":"valid"},
-		"5":{"layer":"Dropout","rate":0.4,"seed":null},
+                "5":{"layer":"Dropout","rate":0.4,"seed":null},
                 "6":{"layer":"MaxPooling2D","pool_size":[2,2],"stride":2},
                 "7":{"layer":"Conv2D","filters":64,"kernel_size":[3,3],"activation":"relu","padding":"valid"},
                 "8":{"layer":"Conv2D","filters":64,"kernel_size":[3,3],"activation":"relu","padding":"valid"},
                 "9":{"layer":"MaxPooling2D","pool_size":[2,2],"stride":2},
                 "10":{"layer":"Dropout","rate":0.4,"seed":null},
                 "11":{"layer":"Flatten"},
-                "12":{"layer":"Dense","unit":512,"activation":"relu"},
-                "13":{"layer":"Dense","unit":7,"activation":"softmax"}
+                "12":{"layer":"Dense","unit":512,"activation":"relu"}
                },
     "compiler": {
                 "loss":"categorical_crossentropy",

@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[27]:
-
-
 # standard packages
 import json
 import numpy as np
@@ -21,12 +15,11 @@ from keras.callbacks import Callback
 import gc
 
 # import legend
-legend = pd.read_csv('Data/CSVs/Audio Legend Clean.csv')[['emotion','filename']].dropna()
+legend = pd.read_csv('Data/CSVs/Audio Legend Clean.csv')[['emotion','filename','sex']].dropna()
 legend['filename'] = legend['filename'].str.replace('.wav','',regex=True)
 
+# set up X varible (Image Data)
 X = []
-y = pd.factorize(legend['emotion'])[0] + 1
-
 print('\nLoading Images:')
 for count, file in enumerate(legend['filename'],start=1):
     image = preprocessing.image.load_img('Data/Images/'+file+'.png')
@@ -34,10 +27,7 @@ for count, file in enumerate(legend['filename'],start=1):
     X.append(input_arr)
     print('%4d of %d complete (%d%%)' % (count,len(legend['filename']),(count/len(legend['filename']))*100),end='\r')
 print('\n')
-
-# split dataset into X and y variables
 X = np.array(X)
-y = keras.utils.to_categorical(y)
 
 # Open JSON file 
 config_name = input("Specify model config json file: ")
@@ -53,6 +43,18 @@ while config_name!= 'quit':
             break_statment = True
         except:
             config_name = input('Something went wrong, please make sure the file exists: ')
+            
+    # set up y variable
+    if config['split_gender'] == 'True':
+        y = legend['emotion']+'_'+legend['sex']
+    if config['split_gender'] == 'False':
+        y = legend['emotion']
+
+    y = pd.factorize(y)
+    
+    labels = list(zip(list(range(len(y[1]))),y[1]))
+    y = y[0]
+    y = keras.utils.to_categorical(y)
    
     # split into training and test sets
     X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=.70,random_state=config['seed'])
@@ -88,7 +90,7 @@ while config_name!= 'quit':
                                    activation=layer['activation']))
         if layer['layer'] == 'Flatten':
             model.add(layers.Flatten())
-
+    model.add(layers.Dense(len(labels),activation='softmax'))
     # compile
     compiler = config['compiler']
     model.compile(loss=compiler['loss'],
@@ -107,7 +109,6 @@ while config_name!= 'quit':
                         epochs=config['epochs'], verbose=1, callbacks=[MyCustomCallback()])
     print('End Time:  ',datetime.now())
 
-
     # make a plot of the accuracy with each epoch
     epoch_accuracy = plt.figure(figsize=(6,4),dpi=100)
     plot_name = 'Epoch v Accuracy - %s.png' % model.name
@@ -120,24 +121,18 @@ while config_name!= 'quit':
 
     # save plot in Plots
     epoch_accuracy.savefig('Data/Plots/'+plot_name)
-
     predict = model.predict(X_test)
 
-    pred = []
-    true = []
+    predictions = pd.DataFrame(predict).rename(columns=dict(labels))
+    predictions['predict_int'] = [np.argmax(entry) for entry in predict]
+    predictions['true_int'] = [np.argmax(entry) for entry in y_test]
+    predictions['true_emo'] = predictions['true_int'].replace(dict(labels))
 
-    for i in range(len(X_test)):
-        pred.append(np.argmax(predict[i]))
-        true.append(np.argmax(y_test[i]))
-
-    predictions = pd.DataFrame({'prediction':pred,'true':true})
-
-    accuracy = int(len(predictions[predictions['prediction'] == predictions['true']])/len(predictions)*100)
+    accuracy = int(len(predictions[predictions['predict_int'] == predictions['true_int']])/len(predictions)*100)
     print('\nModel:',model.name)
     print('Accuracy: %d%%' % accuracy)
 
     path = 'Data/CSVs/Predictions_%s.csv' % (model.name)
     predictions.to_csv(path)
-    
-    config_name = input("\nIf you wish to end the program please type 'quit'.\nIf you wish to test another model, please enter config json: ")
 
+    config_name = input("\nIf you wish to end the program please type 'quit'.\nIf you wish to test another model, please enter config json: ")

@@ -2,6 +2,7 @@
     "model name": "AlexNet_Like",
     "seed":1,
     "epochs":10,
+    "split_gender"="True"
     "layers": {
                 "0":{"layer":"Conv2D","filters":64,"kernel_size":[11,11],"activation":"relu","padding":"valid"},
                 "1":{"layer":"MaxPooling2D","pool_size":[3,3],"stride":2},
@@ -16,7 +17,6 @@
                 "10":{"layer":"Flatten"},
                 "11":{"layer":"Dense","unit":1000,"activation":"relu"},
                 "12":{"layer":"Dense","unit":5000,"activation":"relu"},
-                "13":{"layer":"Dense","unit":7,"activation":"softmax"}
                },
     "compiler": {
                 "loss":"categorical_crossentropy",
