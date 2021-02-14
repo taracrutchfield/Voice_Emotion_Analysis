@@ -1,0 +1,25 @@
+{
+    "model name": "Avg_Pool_Split",
+    "seed":512,
+    "epochs":50,
+    "split_gender":"True",
+    "layers": {
+                "0":{"layer":"Conv2D","filters":16,"kernel_size":[3,3],"activation":"relu","padding":"same"},
+                "1":{"layer":"AveragePooling2D","pool_size":[2,2],"stride":2},
+                "2":{"layer":"Conv2D","filters":32,"kernel_size":[3,3],"activation":"relu","padding":"same"},
+                "3":{"layer":"AveragePooling2D","pool_size":[2,2],"stride":2},
+                "4":{"layer":"Conv2D","filters":64,"kernel_size":[3,3],"activation":"relu","padding":"valid"},
+                "5":{"layer":"AveragePooling2D","pool_size":[2,2],"stride":2},
+                "6":{"layer":"Conv2D","filters":80,"kernel_size":[3,3],"activation":"relu","padding":"valid"},
+                "7":{"layer":"GlobalAveragePooling2D"},
+                "8":{"layer":"Flatten"},
+                "9":{"layer":"Dense","unit":1000,"activation":"relu"},
+                "10":{"layer":"Dropout","rate":0.3,"seed":512},
+                "11":{"layer":"Dense","unit":500,"activation":"relu"}
+               },
+    "compiler": {
+                "loss":"categorical_crossentropy",
+                "optimizer":"adam",
+                "metrics":"accuracy"
+                }
+}

@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 import keras
 from keras import preprocessing
 from keras import layers
-from keras.callbacks import Callback
+from keras import callbacks
 import gc
 
 # import legend
@@ -60,11 +60,7 @@ while config_name!= 'quit':
     X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=.70,random_state=config['seed'])
 
     # split test set into a validation and test sets
-    val_cutoff = int(len(X_test)/2)
-    X_val = X_test[:val_cutoff]
-    y_val = y_test[:val_cutoff]
-    X_test = X_test[val_cutoff:]
-    y_test = y_test[val_cutoff:]
+    X_val, X_test, y_val, y_test = train_test_split(X_test, y_test,train_size=.33,random_state=config['seed'])
 
     # make a model
     model = keras.models.Sequential(name=config['model name'])
@@ -75,19 +71,17 @@ while config_name!= 'quit':
     for key in config['layers'].keys():
         layer = config['layers'][key]
         if layer['layer'] == 'Conv2D':
-            model.add(layers.Conv2D(layer['filters'],
-                                    kernel_size=tuple(layer['kernel_size']),
-                                    activation=layer['activation'],
-                                    padding=layer['padding']))
+            model.add(layers.Conv2D(layer['filters'],kernel_size=tuple(layer['kernel_size']),activation=layer['activation'],padding=layer['padding']))
         if layer['layer'] == 'MaxPooling2D':
-            model.add(layers.MaxPooling2D(pool_size=tuple(layer['pool_size']),
-                                          strides=layer['stride']))
+            model.add(layers.MaxPooling2D(pool_size=tuple(layer['pool_size']),strides=layer['stride']))
+        if layer['layer'] == 'AveragePooling2D':
+            model.add(layers.AveragePooling2D(pool_size=tuple(layer['pool_size']),strides=layer['stride']))
+        if layer['layer'] == 'GlobalAveragePooling2D':
+            model.add(layers.GlobalAveragePooling2D())
         if layer['layer'] == 'Dropout':
-            model.add(layers.Dropout(layer['rate'],
-                                     seed=layer['seed']))
+            model.add(layers.Dropout(layer['rate'],seed=layer['seed']))
         if layer['layer'] == 'Dense':
-            model.add(layers.Dense(layer['unit'], 
-                                   activation=layer['activation']))
+            model.add(layers.Dense(layer['unit'],activation=layer['activation']))
         if layer['layer'] == 'Flatten':
             model.add(layers.Flatten())
     model.add(layers.Dense(len(labels),activation='softmax'))
@@ -98,15 +92,20 @@ while config_name!= 'quit':
                   metrics=compiler['metrics'])
     # print summary    
     print(model.summary())
-
-    class MyCustomCallback(Callback):
+    
+    # callbacks
+    class MyCustomCallback(callbacks.Callback):
           def on_epoch_end(self, epoch, logs=None):
                 gc.collect()
+                
+    earlystopping = callbacks.EarlyStopping(monitor="val_loss", min_delta=0.005, patience=4,  
+                                            restore_best_weights = True) 
 
     # fit model and print start and end times
     print('\nStart Time:',datetime.now())      
     history = model.fit(X_train,y_train, validation_data=(X_val, y_val),batch_size=100, 
-                        epochs=config['epochs'], verbose=1, callbacks=[MyCustomCallback()])
+                        epochs=config['epochs'], verbose=1, 
+                        callbacks=[MyCustomCallback(),earlystopping])
     print('End Time:  ',datetime.now())
 
     # make a plot of the accuracy with each epoch

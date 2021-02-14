@@ -12,6 +12,5 @@
  - **spectral centroid**: the frequency that the spectrum is centered on, the "center of mass" of the sound.
  - **spectral roll off**: the shape of the signal.
 
-
 ### Models
-  Currently I’m testing different architectures for convolutional neural networks, the highest so far having an accuracy of 51% (random chance being around 14%). Depending on time, I would also like to look into using a LSTM recurrent neural network as well. 
+  Currently I’m testing different architectures for convolutional neural networks, the highest so far having an accuracy of 57% (random chance being around 17%).
