@@ -25,9 +25,9 @@ def make_y(y,y_test=None,labels=False,gender_split='False'):
 
     if str(type(y_test)) != "<class 'NoneType'>":
         y_test = make_y(y=y_test,labels=labels,gender_split=gender_split)
-        y = (y,y_test)
+        y = (y,y_test[0])
 
-    return y, labels    
+    return y, labels     
 
 #--------------------------------------------------------------------------------------------------------------------
 
@@ -66,9 +66,8 @@ while config_name!= 'quit':
     if config['final'] == 'False':
         # split into training and test sets
         X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=.80,random_state=config['seed'])
-        y,labels = make_y(y_train,y_test,gender_split=config['split_gender'])
-        
-        y_train,y_test = y
+        new_y, labels = make_y(y_train,y_test,gender_split=config['split_gender'])
+        y_train,y_test = new_y
         
     if config['final'] == 'True':
         X_train = X
@@ -119,7 +118,7 @@ while config_name!= 'quit':
                         epochs=config['epochs'], verbose=1, 
                         callbacks=[MyCustomCallback(),earlystopping])
     print('End Time:  ',datetime.now())
-
+    
     # make a plot of the accuracy with each epoch
     EVA = plt.figure(figsize=(6,4),dpi=100)
     plot_name = 'EVA %s' % model.name
@@ -136,14 +135,15 @@ while config_name!= 'quit':
     
     if config['final'] == 'True':
         keras.model.save('Data/Model/'+str(model.name)+'_final')
-        
+
     if config['final'] == 'False':
         predict = model.predict(X_test)
 
-        predictions = pd.DataFrame(predict).rename(columns=dict(labels))
+        predictions = pd.DataFrame(predict) 
+        predictions.columns = labels.keys()
         predictions['predict_int'] = [np.argmax(entry) for entry in predict]
         predictions['true_int'] = [np.argmax(entry) for entry in y_test]
-        predictions['true_emo'] = predictions['true_int'].replace(dict(labels))
+        predictions['true_emo'] = predictions['true_int'].replace(dict(zip(labels.values(),labels.keys())))
 
         accuracy = int(len(predictions[predictions['predict_int'] == predictions['true_int']])/len(predictions)*100)
         print('\nModel:',model.name)
