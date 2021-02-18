@@ -13,13 +13,15 @@
                 "6":{"layer":"Conv2D","filters":80,"kernel_size":[3,3],"activation":"relu","padding":"valid"},
                 "7":{"layer":"GlobalAveragePooling2D"},
                 "8":{"layer":"Flatten"},
-                "9":{"layer":"Dense","unit":1000,"activation":"relu"},
-                "10":{"layer":"Dropout","rate":0.3,"seed":512},
-                "11":{"layer":"Dense","unit":500,"activation":"relu"}
+                "9":{"layer":"Dense","unit":5000,"activation":"relu"},
+                "10":{"layer":"Dense","unit":1000,"activation":"relu"},
+                "11":{"layer":"Dropout","rate":0.3,"seed":512},
+                "12":{"layer":"Dense","unit":500,"activation":"relu"}
                },
     "compiler": {
                 "loss":"categorical_crossentropy",
                 "optimizer":"adam",
                 "metrics":"accuracy"
-                }
+                },
+    "final":"False"
 }

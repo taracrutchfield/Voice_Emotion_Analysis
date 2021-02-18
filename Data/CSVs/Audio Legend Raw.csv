@@ -1,4 +1,4 @@
-,path,original,actorid,statment,emotion,sex,race,ethnicity
+,path,original,actorid,statement,emotion,sex,race,ethnicity
 0,Data/Audio/Raw/CREMA_D/,1001_DFA_ANG_XX.wav,1001,3,anger,Male,Caucasian,Not Hispanic
 1,Data/Audio/Raw/CREMA_D/,1001_DFA_DIS_XX.wav,1001,3,disgust,Male,Caucasian,Not Hispanic
 2,Data/Audio/Raw/CREMA_D/,1001_DFA_FEA_XX.wav,1001,3,fear,Male,Caucasian,Not Hispanic

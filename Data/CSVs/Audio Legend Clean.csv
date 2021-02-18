@@ -1,4 +1,4 @@
-,original,actorid,statment,emotion,sex,race,ethnicity,time,filename
+,original,actorid,statement,emotion,sex,race,ethnicity,time,filename
 0,1001_DFA_ANG_XX.wav,1001,3,anger,Male,Caucasian,Not Hispanic,1.68,Clip_0000.wav
 1,1001_DFA_DIS_XX.wav,1001,3,disgust,Male,Caucasian,Not Hispanic,1.5,Clip_0001.wav
 2,1001_DFA_FEA_XX.wav,1001,3,fear,Male,Caucasian,Not Hispanic,1.26,Clip_0002.wav

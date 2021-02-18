@@ -1,0 +1,1 @@
+{"mel spectrogram": {"min": -80.0, "max": 3.814697265625e-06}, "chroma": {"min": 0.0, "max": 1.0}, "mel cepstral": {"min": -1018.1292114257812, "max": 238.99896240234375}, "centroid": {"min": 0.0, "max": 6433.52308816607}, "rolloff": {"min": 0.0, "max": 7867.1875}}
