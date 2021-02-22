@@ -8,26 +8,25 @@ from datetime import datetime
 
 # machine learning
 from sklearn.model_selection import train_test_split
-import keras
+from tensorflow import keras
 from keras import preprocessing
 from keras import layers
 from keras import callbacks
 import gc
 
-def make_y(y,y_test=None,labels=False,gender_split='False'):
-    if gender_split == 'False':
-        y = y.str.split('_',expand=True)[0]
+def make_y(y_list,labels=None,gender_split='True'):
+    new_y_list = []
+    for y in y_list:
+        if gender_split == 'False':
+            y = y.str.split('_',expand=True)[0]
 
-    if labels == False:
-        labels = dict(zip(y.unique(), list(range(len(y.unique())))))
-    y = y.replace(labels)
-    y = keras.utils.to_categorical(y)
-
-    if str(type(y_test)) != "<class 'NoneType'>":
-        y_test = make_y(y=y_test,labels=labels,gender_split=gender_split)
-        y = (y,y_test[0])
-
-    return y, labels     
+        if labels == None:
+            labels = dict(zip(y.unique(), list(range(len(y.unique())))))
+        y = y.replace(labels)
+        y = keras.utils.to_categorical(y)
+        new_y_list.append(y)
+        
+    return new_y_list, labels   
 
 #--------------------------------------------------------------------------------------------------------------------
 
@@ -48,7 +47,6 @@ print('\n')
 X = np.array(X)
 y = legend['emotion']+'_'+legend['sex']
 
-# Open JSON file 
 config_name = input("Specify model config json file: ")
 
 while config_name!= 'quit':
@@ -65,14 +63,19 @@ while config_name!= 'quit':
 
     if config['final'] == 'False':
         # split into training and test sets
-        X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=.80,random_state=config['seed'])
-        new_y, labels = make_y(y_train,y_test,gender_split=config['split_gender'])
-        y_train,y_test = new_y
+        X_train, X_test, y_train, y_test_og = train_test_split(X,y,train_size=.80,random_state=config['seed'])
+
+        # get validation set from training set
+        X_train, X_val, y_train, y_val = train_test_split(X_train,y_train,train_size=.80,random_state=config['seed'])
+        new_y, labels = make_y([y_train,y_test_og,y_val],gender_split=config['split_gender'])
+        y_train,y_test,y_val = new_y
         
     if config['final'] == 'True':
-        X_train = X
-        y_train,labels = make_y(y,gender_split=config['split_gender'])
-
+        # split into training and validation sets
+        X_train, X_val, y_train, y_val = train_test_split(X,y,train_size=.80,random_state=config['seed'])
+        new_y, labels = make_y([y_train,y_val],gender_split=config['split_gender'])
+        y_train,y_val = new_y
+        
     # make a model
     model = keras.models.Sequential(name=config['model name'])
 
@@ -89,6 +92,8 @@ while config_name!= 'quit':
             model.add(layers.AveragePooling2D(pool_size=tuple(layer['pool_size']),strides=layer['stride']))
         if layer['layer'] == 'GlobalAveragePooling2D':
             model.add(layers.GlobalAveragePooling2D())
+        if layer['layer'] == 'GlobalMaxPool2D':
+            model.add(layers.GlobalMaxPool2D())
         if layer['layer'] == 'Dropout':
             model.add(layers.Dropout(layer['rate'],seed=layer['seed']))
         if layer['layer'] == 'Dense':
@@ -114,7 +119,7 @@ while config_name!= 'quit':
 
     # fit model and print start and end times
     print('\nStart Time:',datetime.now())      
-    history = model.fit(X_train,y_train, validation_split=0.20,batch_size=100, 
+    history = model.fit(X_train,y_train,validation_data=(X_val,y_val),batch_size=100, 
                         epochs=config['epochs'], verbose=1, 
                         callbacks=[MyCustomCallback(),earlystopping])
     print('End Time:  ',datetime.now())
@@ -123,31 +128,27 @@ while config_name!= 'quit':
     EVA = plt.figure(figsize=(6,4),dpi=100)
     plot_name = 'EVA %s' % model.name
     plt.plot(history.history['accuracy'], label='accuracy',c='#4b3b75')
-    plt.plot(history.history['val_accuracy'], label = 'val_accuracy',c='#91c64d')
+    plt.plot(history.history['val_accuracy'], label = 'validation accuracy',c='#91c64d')
     plt.xlabel('Epoch')
     plt.ylabel('Accuracy')
     plt.title(model.name)
     plt.ylim(0,1)
-    plt.legend();
-
+    plt.legend()
+    
     # save plot in Plots
-    EVA.savefig('Data/Plots/'+plot_name)
+    EVA.savefig('Data/Plots/'+plot_name);
     
     if config['final'] == 'True':
-        keras.model.save('Data/Model/'+str(model.name)+'_final')
-
+        model.save('Data/Model/'+str(model.name))
+        with open('Data/Model Config/Model_Labels.json', 'w') as fp:
+            json.dump(labels, fp) 
+        
     if config['final'] == 'False':
         predict = model.predict(X_test)
 
         predictions = pd.DataFrame(predict) 
         predictions.columns = labels.keys()
-        predictions['predict_int'] = [np.argmax(entry) for entry in predict]
-        predictions['true_int'] = [np.argmax(entry) for entry in y_test]
-        predictions['true_emo'] = predictions['true_int'].replace(dict(zip(labels.values(),labels.keys())))
-
-        accuracy = int(len(predictions[predictions['predict_int'] == predictions['true_int']])/len(predictions)*100)
-        print('\nModel:',model.name)
-        print('Accuracy: %d%%' % accuracy)
+        predictions['true'] = y_test_og.values
 
         path = 'Data/CSVs/Predictions_%s.csv' % (model.name)
         predictions.to_csv(path)
