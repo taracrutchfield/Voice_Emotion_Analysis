@@ -22,5 +22,5 @@
                 "optimizer":"adam",
                 "metrics":"accuracy"
                 },
-    "final":"False"
+    "final":"True"
 }
