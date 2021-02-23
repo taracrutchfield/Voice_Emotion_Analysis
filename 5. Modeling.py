@@ -140,7 +140,8 @@ while config_name!= 'quit':
     
     if config['final'] == 'True':
         model.save('Data/Model/'+str(model.name))
-        with open('Data/Model Config/Model_Labels.json', 'w') as fp:
+        model_config_path = 'Data/Model Config/Model_Labels_%s.json' % model.name
+        with open(model_config_path , 'w') as fp:
             json.dump(labels, fp) 
         
     if config['final'] == 'False':
