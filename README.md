@@ -17,11 +17,12 @@ Features Description:
    Currently I’m testing this final model using emotional scenes from famous movies. Here are the results as of this last update:
 
 - [A Few Good Men](https://youtu.be/9FnO3igOkOk?t=39) (Anger Test)
- - Anger:   47%
- - Disgust: 36%
- - Sad:     10%
- - Other:    7%
+  - Anger:   47%
+  - Disgust: 36%
+  - Sad:     10%
+  - Other:    7%
+
 - [Steel Magnolias](https://www.youtube.com/watch?v=iZx1W6cHw-g) (Sad Test)
- - Sad:     80%
- - Fear     10%
- - Other    10%
+  - Sad:     80%
+  - Fear     10%
+  - Other    10%
