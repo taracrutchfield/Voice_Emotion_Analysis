@@ -9,8 +9,6 @@
  - **mel-frequency spectrogram**: displays the spectrum of the sound.
  - **mel-frequency cepstral coefficients**: describes the shape of the spectral envelope.
  - **chroma_features**: describes the energy of each pitch class.
- - **spectral centroid**: the frequency that the spectrum is centered on, the "center of mass" of the sound.
- - **spectral roll off**: the shape of the signal.
 
 ### Models
-  Currently I’m testing different architectures for convolutional neural networks, the highest so far having an accuracy of 57% (random chance being around 17%).
+  Currently I’m testing different architectures for convolutional neural networks, the highest so far having an accuracy of 59% (random chance being around 17%).
