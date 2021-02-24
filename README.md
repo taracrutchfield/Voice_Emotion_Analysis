@@ -16,7 +16,7 @@ Features Description:
    Overall, the average pooling models did the best, with both the emotion and gender+emotion labels fairing equally well. Due to being the top two models, and the fact that their independent emotion scores were complimentary, the results of the two average pooling models were combined to create the final model, with a testing accuracy of 59% (random change being 17%).
    Currently I’m testing this final model using emotional scenes from famous movies. Here are the results as of this last update:
 
-- [A Few Good Men](https://youtu.be/9FnO3igOkOk?t=39) (Anger Test)
+- [A Few Good Men](https://youtu.be/9FnO3igOkOk?t=39) (Anger/Disgust Test)
   - Anger:   47%
   - Disgust: 36%
   - Sad:     10%
@@ -26,3 +26,6 @@ Features Description:
   - Sad:     80%
   - Fear     10%
   - Other    10%
+
+- [Pulp Fiction](https://youtu.be/qo5jnBJvGUs?t=26) (Anger Test)
+  - Anger   100%
