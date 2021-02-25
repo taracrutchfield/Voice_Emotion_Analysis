@@ -202,7 +202,8 @@ class predictions:
     def probability(self):
         '''returns a dataframe of each emotion and the probability of that label
         being correct according to the model'''
-        columns = self.data.columns[:-1]
-        self.data['probability'] = self.data[columns].max(axis=1)
-        self.data = self.data.drop(columns=columns)
-        return self.data    
+        prob = self.data.loc[:]
+        columns = prob.columns[:-1]
+        prob['probability'] = prob[columns].max(axis=1)
+        prob = prob.drop(columns=columns)
+        return prob   
