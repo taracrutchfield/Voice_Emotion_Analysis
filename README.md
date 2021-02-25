@@ -17,15 +17,25 @@ Features Description:
    Currently I’m testing this final model using emotional scenes from famous movies. Here are the results as of this last update:
 
 - [A Few Good Men](https://youtu.be/9FnO3igOkOk?t=39) (Anger/Disgust Test)
-  - Anger:   47%
-  - Disgust: 36%
-  - Sad:     10%
-  - Other:    7%
-
+    - Anger    47%
+    - Disgust  36%
+    - Sad      10%
+    - Other     7%
+    
 - [Steel Magnolias](https://www.youtube.com/watch?v=iZx1W6cHw-g) (Sad Test)
-  - Sad:     80%
-  - Fear     10%
-  - Other    10%
-
+    - Sad     80%
+    - Fear     10%
+    - Other    10%
+    
 - [Pulp Fiction](https://youtu.be/qo5jnBJvGUs?t=26) (Anger Test)
-  - Anger   100%
+    - Anger   100%
+    
+- [The Blair Witch Project](https://www.youtube.com/watch?v=2m_lqGnLtWA) (Fear/Sad Test)
+    - Fear     50%
+    - Sad      32%
+    - Other    13%
+    
+- [Elf](https://www.youtube.com/watch?v=fNMtHosai08) (Happy/Neutral)
+    - Sad      51%
+    - Fear     33%
+    - Other    13%
