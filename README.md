@@ -14,28 +14,13 @@ Features Description:
 
 ### Conclusion
    Overall, the average pooling models did the best, with both the emotion and gender+emotion labels fairing equally well. Due to being the top two models, and the fact that their independent emotion scores were complimentary, the results of the two average pooling models were combined to create the final model, with a testing accuracy of 59% (random change being 17%).
-   Currently I’m testing this final model using emotional scenes from famous movies. Here are the results as of this last update:
-
-- [A Few Good Men](https://youtu.be/9FnO3igOkOk?t=39) (Anger/Disgust Test)
-    - Anger    47%
-    - Disgust  36%
-    - Sad      10%
-    - Other     7%
-    
-- [Steel Magnolias](https://www.youtube.com/watch?v=iZx1W6cHw-g) (Sad Test)
-    - Sad     80%
-    - Fear     10%
-    - Other    10%
-    
-- [Pulp Fiction](https://youtu.be/qo5jnBJvGUs?t=26) (Anger Test)
-    - Anger   100%
-    
-- [The Blair Witch Project](https://www.youtube.com/watch?v=2m_lqGnLtWA) (Fear/Sad Test)
-    - Fear     50%
-    - Sad      32%
-    - Other    13%
-    
-- [Elf](https://www.youtube.com/watch?v=fNMtHosai08) (Happy/Neutral)
-    - Sad      51%
-    - Fear     33%
-    - Other    13%
+   Currently I’m testing this final model using emotional scenes from famous movies, as well as my own recordings. Here are the results as of this last update.
+   
+   
+![Barplot of the sum emotion probabilities](https://github.com/taracrutchfield/Voice_Emotion_Analysis/blob/master/Data/Plots/Final%20Model%20Test.png)
+   
+Movie Scenes:
+- [A Few Good Men](https://youtu.be/9FnO3igOkOk?t=39)
+- [Steel Magnolias](https://www.youtube.com/watch?v=iZx1W6cHw-g)
+- [Pulp Fiction](https://youtu.be/qo5jnBJvGUs?t=26)
+- [The Blair Witch Project](https://www.youtube.com/watch?v=2m_lqGnLtWA)
